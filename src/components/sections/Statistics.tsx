@@ -1,22 +1,44 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 
-function Counter({ from = 0, to, duration = 2, text, showPlus = true }: { from?: number, to: number, duration?: number, text: string, showPlus?: boolean })function Counter({ from = 0, to, duration = 2, text, showPlus = true }: { from?: number, to: number, duration?: number, text: string, showPlus?: boolean }) {
+function Counter({ 
+  from = 0, 
+  to, 
+  duration = 2, 
+  text, 
+  showPlus = true 
+}: { 
+  from?: number; 
+  to: number; 
+  duration?: number; 
+  text: string; 
+  showPlus?: boolean;
+}) {
+  const [count, setCount] = useState(from);
+  const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   useEffect(() => {
     if (isInView) {
       let startTimestamp: number;
+
       const step = (timestamp: number) => {
         if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+
+        const progress = Math.min(
+          (timestamp - startTimestamp) / (duration * 1000),
+          1
+        );
+
         setCount(Math.floor(progress * (to - from) + from));
+
         if (progress < 1) {
           window.requestAnimationFrame(step);
         }
       };
+
       window.requestAnimationFrame(step);
     }
   }, [isInView, from, to, duration]);
@@ -24,8 +46,9 @@ function Counter({ from = 0, to, duration = 2, text, showPlus = true }: { from?:
   return (
     <div ref={ref} className="text-center p-6">
       <div className="text-4xl md:text-6xl font-bold text-white mb-2">
-     {count}{showPlus && <span className="text-accent">+</span>}
+        {count}{showPlus && <span className="text-accent">+</span>}
       </div>
+
       <div className="text-gray-400 font-medium tracking-wide uppercase text-sm">
         {text}
       </div>

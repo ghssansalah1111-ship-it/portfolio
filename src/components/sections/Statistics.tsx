@@ -41,7 +41,7 @@ export default function Statistics() {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-x divide-white/10">
           <Counter to={5} text="Happy Clients" />
-          <Counter to={1} text="Year of Experience" />
+          <Counter to={99%} text="Client Satisfaction" />
           <Counter to={20} text="Videos Created" />
         </div>
       </div>

@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-function Counter({ from = 0, to, duration = 2, text, suffix = "" }: { from?: number, to: number, duration?: number, text: string, suffix?: string })  const ref = useRef(null);
+function Counter({ from = 0, to, duration = 2, text, showPlus = true }: { from?: number, to: number, duration?: number, text: string, showPlus?: boolean })function Counter({ from = 0, to, duration = 2, text, showPlus = true }: { from?: number, to: number, duration?: number, text: string, showPlus?: boolean }) {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function Counter({ from = 0, to, duration = 2, text, suffix = "" }: { from?: num
   return (
     <div ref={ref} className="text-center p-6">
       <div className="text-4xl md:text-6xl font-bold text-white mb-2">
-       {count}
+     {count}{showPlus && <span className="text-accent">+</span>}
       </div>
       <div className="text-gray-400 font-medium tracking-wide uppercase text-sm">
         {text}
@@ -39,7 +39,7 @@ export default function Statistics() {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-x divide-white/10">
           <Counter to={5} text="Happy Clients" />
-          <Counter to={99} suffix="%" text="Client Satisfaction" />
+          <Counter to={99} showPlus={false} text="Client Satisfaction %" />
           <Counter to={20} text="Videos Created" />
         </div>
       </div>

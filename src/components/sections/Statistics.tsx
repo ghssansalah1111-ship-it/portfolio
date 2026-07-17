@@ -24,7 +24,7 @@ function Counter({ from = 0, to, duration = 2, text, suffix = "" }: { from?: num
   return (
     <div ref={ref} className="text-center p-6">
       <div className="text-4xl md:text-6xl font-bold text-white mb-2">
-        {{count}<span className="text-accent">{suffix}</span>
+       {count}<span className="text-accent">+</span>
       </div>
       <div className="text-gray-400 font-medium tracking-wide uppercase text-sm">
         {text}
